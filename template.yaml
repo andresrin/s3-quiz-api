@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Quiz API - S3 con SAM
+
+Globals:
+  Function:
+    Runtime: python3.12.1
+    Timeout: 10
+
+Resources:
+
+  ListBucketsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/list_buckets/
+      Handler: app.lambda_handler
+      Policies:
+        - S3ReadPolicy:
+            BucketName: "*"
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /buckets
+            Method: get
+
+  ListObjectsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/list_objects/
+      Handler: app.lambda_handler
+      Policies:
+        - S3ReadPolicy:
+            BucketName: "*"
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /objects
+            Method: get
+
+Outputs:
+  ApiUrl:
+    Description: URL de la API
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"

@@ -1,0 +1,17 @@
+import boto3
+import json
+
+def lambda_handler(event, context):
+    bucket_name = event.get('queryStringParameters', {}).get('bucket')
+    if not bucket_name:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'El parámetro "bucket" es requerido'})
+        }
+    s3 = boto3.client('s3')
+    response = s3.list_objects_v2(Bucket=bucket_name)
+    objects = [o['Key'] for o in response.get('Contents', [])]
+    return {
+        'statusCode': 200,
+        'body': json.dumps({'objects': objects})
+    }
