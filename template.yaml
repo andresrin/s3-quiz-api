@@ -4,7 +4,7 @@ Description: Quiz API - S3 con SAM
 
 Globals:
   Function:
-    Runtime: python3.12.1
+    Runtime: python3.12
     Timeout: 10
 
 Resources:

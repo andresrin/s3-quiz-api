@@ -2,7 +2,7 @@ version = 0.1
 
 [default.deploy.parameters]
 stack_name = "s3-quiz-api"
-s3_bucket = "tu-bucket-de-artefactos-sam"   # Bucket S3 para artefactos de deploy
+s3_bucket = "s3-quiz-bucket"   # Bucket S3 para artefactos de deploy
 s3_prefix = "s3-quiz-api"
 region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
