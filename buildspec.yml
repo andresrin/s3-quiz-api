@@ -13,7 +13,7 @@ phases:
 
   post_build:
     commands:
-      - sam deploy --no-confirm-changeset
+      - sam deploy --no-confirm-changeset --no-fail-on-empty-changeset  # ← agregar esto
 
 artifacts:
   files:
