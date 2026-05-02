@@ -15,8 +15,11 @@ Resources:
       CodeUri: src/list_buckets/
       Handler: app.lambda_handler
       Policies:
-        - S3ReadPolicy:
-            BucketName: "*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:ListAllMyBuckets
+              Resource: "*"
       Events:
         Api:
           Type: Api
@@ -30,8 +33,11 @@ Resources:
       CodeUri: src/list_objects/
       Handler: app.lambda_handler
       Policies:
-        - S3ReadPolicy:
-            BucketName: "*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:ListBucket
+              Resource: "*"
       Events:
         Api:
           Type: Api
